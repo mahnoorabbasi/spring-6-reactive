@@ -1,0 +1,44 @@
+package guru.springframework.spring6reactive.services;
+
+import guru.springframework.spring6reactive.mappers.BeerMapper;
+import guru.springframework.spring6reactive.model.BeerDTO;
+import guru.springframework.spring6reactive.repositories.BeerRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+@Service
+@RequiredArgsConstructor
+public class BeerServiceImpl implements BeerService {
+
+    private final BeerRepository beerRepository;
+    private final BeerMapper beerMapper;
+
+    @Override
+    public Flux<BeerDTO> listBeers() {
+        return beerRepository.findAll()
+                .map(beerMapper::beerToBeerDto);
+    }
+
+    @Override
+    public Mono<BeerDTO> getBeerById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Mono<BeerDTO> saveNewBeer(BeerDTO beerDTO) {
+        return null;
+    }
+
+    @Override
+    public void deleteBeerById(Integer id) {
+
+    }
+
+    @Override
+    public Mono<BeerDTO> updateBeer(BeerDTO beerDTO, Integer integer) {
+        return null;
+    }
+}
